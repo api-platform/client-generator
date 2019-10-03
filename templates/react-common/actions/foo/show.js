@@ -2,8 +2,8 @@ import {
   fetch,
   extractHubURL,
   normalize,
-  mercureSubscribe as subscribe
 } from '../../utils/dataAccess';
+import { mercureSubscribe as subscribe } from '../../../utils/mercure';
 
 export function error(error) {
   return { type: '{{{uc}}}_SHOW_ERROR', error };

@@ -48,7 +48,8 @@ export default class extends BaseGenerator {
       "error/SubmissionError.js",
 
       // utils
-      "utils/fetch.js"
+      "utils/fetch.js",
+      "../utils/mercure.js"
     ]);
   }
 
@@ -184,5 +185,11 @@ export const store = new Vuex.Store({
       { hydraPrefix: this.hydraPrefix },
       false
     );
+    this.createFile(
+      '../utils/mercure.js',
+      `${dir}/utils/mercure.js`,
+      {},
+      false
+    )
   }
 }

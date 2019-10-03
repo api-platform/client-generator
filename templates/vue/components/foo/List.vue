@@ -100,6 +100,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { mercureSubscribe as subscribe } from '../../utils/mercure';
 
 export default {
   computed: mapGetters({
@@ -118,4 +119,30 @@ export default {
     getPage: '{{{lc}}}/list/default'
   })
 }
+
+export function mercureSubscribe(hubUrl, topics) {
+  return dispatch => {
+    const eventSource = subscribe(hubUrl, topics);
+    dispatch(mercureOpen(eventSource));
+    eventSource.addEventListener('message', event =>
+     dispatch(mercureMessage(normalize(JSON.parse(event.data))))
+    );
+  }
+}
+
+export function mercureOpen(eventSource) {
+  return { type: '{{{uc}}}_LIST_MERCURE_OPEN', eventSource };
+}
+
+export function mercureMessage(retrieved) {
+  return dispatch => {
+    if (1 === Object.keys(retrieved).length) {
+      dispatch({ type: '{{{uc}}}_LIST_MERCURE_DELETED', retrieved });
+      return;
+    }
+
+    dispatch({ type: '{{{uc}}}_LIST_MERCURE_MESSAGE', retrieved });
+  };
+}
+
 </script>

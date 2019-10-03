@@ -1,9 +1,9 @@
 import {
   fetch,
   normalize,
-  extractHubURL,
-  mercureSubscribe as subscribe
+  extractHubURL
 } from '../../utils/dataAccess';
+import { mercureSubscribe as subscribe } from '../../../utils/mercure';
 import { success as deleteSuccess } from './delete';
 
 export function error(error) {
