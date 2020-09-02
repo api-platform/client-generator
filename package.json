@@ -56,7 +56,8 @@
     "test-gen": "rm -rf ./tmp && yarn build && ./lib/index.js https://demo.api-platform.com ./tmp/react && ./lib/index.js https://demo.api-platform.com ./tmp/react-native -g react-native && ./lib/index.js https://demo.api-platform.com ./tmp/vue -g vue && ./lib/index.js https://demo.api-platform.com ./tmp/admin-on-rest -g admin-on-rest",
     "test-gen-cs": "./node_modules/.bin/prettier --single-quote -l \"./tmp/react/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "test-gen-swagger": "rm -rf ./tmp && yarn build && ./lib/index.js  https://demo.api-platform.com/docs.json ./tmp/react -f swagger && ./lib/index.js https://demo.api-platform.com/docs.json ./tmp/react-native -g react-native -f swagger && ./lib/index.js https://demo.api-platform.com/docs.json ./tmp/vue -g vue -f swagger && ./lib/index.js https://demo.api-platform.com/docs.json ./tmp/admin-on-rest -g admin-on-rest -f swagger",
-    "test-gen-env": "rm -rf ./tmp && yarn build && API_PLATFORM_CLIENT_GENERATOR_ENTRYPOINT=https://demo.api-platform.com API_PLATFORM_CLIENT_GENERATOR_OUTPUT=./tmp ./lib/index.js"
+    "test-gen-env": "rm -rf ./tmp && yarn build && API_PLATFORM_CLIENT_GENERATOR_ENTRYPOINT=https://demo.api-platform.com API_PLATFORM_CLIENT_GENERATOR_OUTPUT=./tmp ./lib/index.js",
+    "gen-use-react-typescript": "./lib/index.js https://demo.api-platform.com ./tmp/use-react-typescript/src -g use-react-typescript"
   },
   "husky": {
     "hooks": {
