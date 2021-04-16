@@ -14,6 +14,14 @@ const Page: NextComponentType<NextPageContext, Props, Props> = ({ {{{lc}}} }) =>
       <div>
           <Head>
             <title>{`Show {{{ucf}}} ${ {{~lc}}['@id']}`}</title>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML=\{{
+                  __html: JSON.stringify(
+                    {{{lc}}}
+                  ),
+                }}
+            />
           </Head>
         </div>
       <Show {{{lc}}}={ {{{lc}}} }/>

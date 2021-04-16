@@ -14,6 +14,14 @@ const Page: NextComponentType<NextPageContext, Props, Props> = ({collection}) =>
       <div>
         <Head>
           <title>{{{ucf}}} List</title>
+          <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML=\{{
+                  __html: JSON.stringify(
+                    collection
+                  ),
+                }}
+              />
         </Head>
       </div>
       <List {{{name}}}={collection['{{{hydraPrefix}}}member']}/>
