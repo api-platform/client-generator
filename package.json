@@ -18,20 +18,20 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
+    "@babel/eslint-parser": "^7.14.3",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.6.0",
-    "babel-eslint": "^10.0.0",
     "babel-jest": "^26.0.0",
     "eslint": "^7.17.0",
-    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.3.0",
-    "husky": "^4.3.6",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
-    "lint-staged": "^10.5.3",
+    "lint-staged": "^11.0.0",
     "tmp": "^0.2.1"
   },
   "dependencies": {
@@ -55,15 +55,11 @@
     "watch": "babel --watch src -d lib --ignore '*.test.js'",
     "test-gen": "rm -rf ./tmp && yarn build && ./lib/index.js https://demo.api-platform.com ./tmp/react -g react && ./lib/index.js https://demo.api-platform.com ./tmp/react-native -g react-native && ./lib/index.js https://demo.api-platform.com ./tmp/vue -g vue",
     "test-gen-swagger": "rm -rf ./tmp && yarn build && ./lib/index.js  https://demo.api-platform.com/docs.json ./tmp/react -f swagger && ./lib/index.js https://demo.api-platform.com/docs.json ./tmp/react-native -g react-native -f swagger && ./lib/index.js https://demo.api-platform.com/docs.json ./tmp/vue -g vue -f swagger",
-    "test-gen-env": "rm -rf ./tmp && yarn build && API_PLATFORM_CLIENT_GENERATOR_ENTRYPOINT=https://demo.api-platform.com API_PLATFORM_CLIENT_GENERATOR_OUTPUT=./tmp ./lib/index.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test-gen-env": "rm -rf ./tmp && yarn build && API_PLATFORM_CLIENT_GENERATOR_ENTRYPOINT=https://demo.api-platform.com API_PLATFORM_CLIENT_GENERATOR_OUTPUT=./tmp ./lib/index.js",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/*.js": "npm run lint"
+    "*.js": "eslint --cache --fix"
   },
   "bin": {
     "generate-api-platform-client": "./lib/index.js"
