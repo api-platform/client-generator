@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { View } from 'react-native';
 import {
-  FormLabel,
-  FormInput,
-  FormValidationMessage,
+  Input,
   Button,
 } from 'react-native-elements';
 
@@ -12,27 +10,45 @@ import {
 class Form extends Component {
 
   renderField(data) {
-    const hasError = data.meta.touched && !!data.meta.error;
+
     data.input.value = data.input.value.toString();
+
+    let keyboard = data.type === "number" ? keyboard = "numeric" : keyboard = "default"
+
     return (
       <View>
-        <FormLabel labelStyle={ {color: 'gray', fontSize: 20} }>
-            {data.input.name}
-        </FormLabel>
-        <FormInput containerStyle={ {flexDirection:'row'} }
-                   inputStyle={ {color: 'black', flex:1} }
+        <Input
+                   labeltStyle={ {color: 'gray', flex:1} }
                    {...data.input}
                    step={data.step}
                    required={data.required}
                    placeholder={data.placeholder}
                    id={`{{{lc}}}_${data.input.name}`}
-                   multiline={true}
-                   keyboardType='numeric'
+                   errorMessage={data.meta.error}
+                   keyboardType={keyboard}
+                   label={data.input.name}
         />
-        {hasError &&
-          <FormValidationMessage>{data.meta.error}</FormValidationMessage> }
       </View>
     );
+  }
+
+  intParser = (value) => {
+    if(isNaN(value)) {
+      value
+    }
+    else if(this.props.initialValues) {
+      if ((isNaN(value)) && (typeof value === 'string')){
+         value
+      } else if(value) {
+        return parseInt(value, 10)
+      } else{
+        value
+      }
+    } 
+    else {
+      return parseInt(value, 10)
+    } 
+    return value
   }
 
   render() {
@@ -42,7 +58,7 @@ class Form extends Component {
       <View style={ {backgroundColor: 'white', paddingBottom: 20} }>
 {{#each formFields}}
         <Field component={this.renderField} name="{{{name}}}" type="{{{type}}}"
-          placeholder="{{{description}}}"{{#if required}} required={true}{{/if}} />
+          placeholder="{{{description}}}"{{#if required}} required={true}{{/if}} parse={this.intParser} value="" />
 {{/each}}
         <Button buttonStyle={styles.button}
           title='SAVE'

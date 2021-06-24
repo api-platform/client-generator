@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ScrollView, View, Text } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { ListItem, Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import Spinner from '../Spinner';
 import { list, reset } from '../../actions/{{{lc}}}/list';
@@ -36,7 +36,9 @@ class ListComponent extends Component {
     return (
         <ListItem
             key={Math.random()}
-            onPressRightIcon={() => ListComponent.show(item['@id'])}
+            rightIcon={
+              <Icon name='eye' onPress={() => ListComponent.show(item['@id'])}
+             reverse={true} type='font-awesome' color='#3faab4'/>}
             subtitle={
               <View>
                 <View style={viewList}>

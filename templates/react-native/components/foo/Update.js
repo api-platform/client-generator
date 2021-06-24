@@ -29,8 +29,6 @@ class Update extends Component {
 
   render() {
 
-    if (this.props.deleted) return Actions.pop();
-
     const item = this.props.updated ? this.props.updated : this.props.retrieved;
 
     const {viewStyle, textStyleAlert, textStyleSuccess} = styles;
@@ -101,7 +99,7 @@ Update.propTypes = {
   update: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   id: PropTypes.string,
-  created:PropTypes.func
+  created:PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Update);

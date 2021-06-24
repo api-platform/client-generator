@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ScrollView, View, Text } from 'react-native';
-import { Card, List, ListItem, SocialIcon } from 'react-native-elements';
+import { Card, ListItem, SocialIcon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import Spinner from '../Spinner';
 import { retrieve, reset } from '../../actions/{{{lc}}}/show';
@@ -51,7 +51,6 @@ class Show extends Component {
             subtitleStyle={ {color: 'black', fontSize: 16} }
             titleStyle={ {color: 'gray', fontSize: 16, paddingBottom: 10} }
             key={value}
-            hideChevron={true}
             title={title}
             subtitle={Array.isArray(value) ? value.length.toString() : value}
             subtitleNumberOfLines={100}
@@ -87,9 +86,8 @@ class Show extends Component {
   render() {
 
     if (this.props.loading) return <Spinner size="large"/>;
-    if (this.props.deleted) return Actions.pop();
 
-    const item = this.props.retrieved;
+    const item = this.props.updated ? this.props.updated : this.props.retrieved;
 
     const {viewStyle, textStyleAlert } = styles;
 
@@ -98,14 +96,12 @@ class Show extends Component {
           <ScrollView>
             {item &&
             <Card title="{{{title}}}">
-              <List title="title">
                 {Show.renderRow('id', item['@id'])}
 {{#each fields}}
     {{#ifNotResource reference }}
                 {Show.renderRow('{{{name}}}', item['{{{name}}}'])}
     {{/ifNotResource}}
 {{/each}}
-              </List>
             </Card>
             }
             {this.props.deleteLoading && <View style={viewStyle}><Spinner size='large'/></View>}
@@ -133,6 +129,7 @@ const mapStateToProps = (state) => {
     deleteError: state.{{{lc}}}.del.error,
     deleteLoading: state.{{{lc}}}.del.loading,
     deleted: state.{{{lc}}}.del.deleted,
+    update: state.{{{lc}}}.update.updated
   };
 };
 
@@ -179,7 +176,8 @@ Show.propTypes = {
   showModal:PropTypes.bool,
   refresh:PropTypes.number,
   id:PropTypes.string,
-  list: PropTypes.func.isRequired
+  list: PropTypes.func.isRequired,
+  updated: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Show);

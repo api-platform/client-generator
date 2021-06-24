@@ -17,7 +17,6 @@ export default [
           <Scene key="{{{lc}}}Create" component={Create}
                  title="Add a new {{{lc}}}"/>,
           <Scene key="{{{lc}}}Show" component={Show}
-                 title="{{{title}}}"
                  leftTitle="< List of {{{title}}}s"
                  onLeft={() => {
                    Actions.pop();

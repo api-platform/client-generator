@@ -15,13 +15,11 @@ class Create extends Component {
 
   onSubmit = values => {
     this.props.create(values);
-    Actions.{{{lc}}}List();
+    Actions.pop();
     delayRefresh();
   };
 
   render() {
-
-    if (this.props.created) return Actions.pop();
 
     const {viewStyle, textStyle} = styles;
 
