@@ -2,6 +2,7 @@ import NextGenerator from "./generators/NextGenerator";
 import NuxtGenerator from "./generators/NuxtGenerator";
 import ReactGenerator from "./generators/ReactGenerator";
 import ReactNativeGenerator from "./generators/ReactNativeGenerator";
+import ReactTypescriptGenerator from "./generators/ReactTypescriptGenerator";
 import TypescriptInterfaceGenerator from "./generators/TypescriptInterfaceGenerator";
 import VueGenerator from "./generators/VueGenerator";
 import VuetifyGenerator from "./generators/VuetifyGenerator";
@@ -24,6 +25,8 @@ export default function generators(generator = "react") {
       return wrap(ReactNativeGenerator);
     case "typescript":
       return wrap(TypescriptInterfaceGenerator);
+    case "react-typescript":
+      return wrap(ReactTypescriptGenerator);
     case "vue":
       return wrap(VueGenerator);
     case "vuetify":
